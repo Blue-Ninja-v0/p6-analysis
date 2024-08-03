@@ -1,23 +1,23 @@
-# P6 Analysis Tool
+# 📊 P6 Analysis Tool
 
-## Overview
+## 🌟 Overview
 
 P6 Analysis Tool is a Flask-based web application designed for analyzing and processing Primavera P6 XER files. This tool provides a user-friendly interface for uploading XER files, processing them through various stages of analysis, and generating comprehensive reports and visualizations. It is particularly useful for construction projects and other industries that rely heavily on project scheduling and cost management.
 
-## Features
+## 🚀 Features
 
-- XER file upload and parsing
-- Multi-step processing pipeline:
+- 📁 XER file upload and parsing
+- 🔄 Multi-step processing pipeline:
   1. Data preprocessing and analysis
   2. Critical path analysis with backward and forward passes
   3. Comprehensive reporting
   4. Gantt chart generation
-- Conversion of data to an easy-to-read Excel structure
-- Cost profiling support for data that can't be loaded into P6
-- Ability to model cost data in its native Excel form
-- Create Excel activity-profiles (by month, bi-weekly, weekly, quarterly etc) using user-defined configurations to group specific activities and tasks
+- 📈 Conversion of data to an easy-to-read Excel structure
+- 💰 Cost profiling support for data that can't be loaded into P6
+- 📊 Ability to model cost data in its native Excel form
+- 📅 Create Excel activity-profiles (by month, bi-weekly, weekly, quarterly etc) using user-defined configurations to group specific activities and tasks
 
-## Installation
+## 🛠️ Installation
 
 1. Clone this repository:
    ```
@@ -36,15 +36,15 @@ P6 Analysis Tool is a Flask-based web application designed for analyzing and pro
    pip install -r requirements.txt
    ```
 
-## Configuration
+## ⚙️ Configuration
 
 Customize the analysis settings by modifying the `config.yaml` file. This file allows you to define:
 
-- Custom task groups
-- Task type filters
-- Master settings (e.g., date range for analysis)
+- 📋 Custom task groups
+- 🔍 Task type filters
+- 🎛️ Master settings (e.g., date range for analysis)
 
-## Usage
+## 🚀 Usage
 
 1. Start the Flask application:
    ```
@@ -59,7 +59,7 @@ Customize the analysis settings by modifying the `config.yaml` file. This file a
 
 5. Configure and run the final analysis as needed
 
-## Project Structure
+## 📁 Project Structure
 
 - `app.py`: Main Flask application
 - `orchestrator.py`: Coordinates the execution of processing scripts
@@ -69,10 +69,10 @@ Customize the analysis settings by modifying the `config.yaml` file. This file a
 - `static/`: Static files (CSS, JavaScript, etc.)
 - `uploads/`: Directory for uploaded XER files and generated outputs
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
