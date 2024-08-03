@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload XER File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="retro-header">
+            <pre>
+$$$$$$$\                             $$$$$$\  $$\                 $$\      $$\ $$\                                    $$\ 
+$$  __$$\                           $$  __$$\ \__|                $$ | $\  $$ |\__|                                   $$ |
+$$ |  $$ | $$$$$$\   $$$$$$\        $$ /  \__|$$\ $$\   $$\       $$ |$$$\ $$ |$$\ $$$$$$$$\ $$$$$$\   $$$$$$\   $$$$$$$ |
+$$$$$$$  |$$  __$$\ $$  __$$\       \$$$$$$\  $$ |\$$\ $$  |      $$ $$ $$\$$ |$$ |\____$$  |\____$$\ $$  __$$\ $$  __$$ |
+$$  ____/ $$$$$$$$ |$$$$$$$$ |       \____$$\ $$ | \$$$$  /       $$$$  _$$$$ |$$ |  $$$$ _/ $$$$$$$ |$$ |  \__|$$ /  $$ |
+$$ |      $$   ____|$$   ____|      $$\   $$ |$$ | $$  $$<        $$$  / \$$$ |$$ | $$  _/  $$  __$$ |$$ |      $$ |  $$ |
+$$ |      \$$$$$$$\ \$$$$$$$\       \$$$$$$  |$$ |$$  /\$$\       $$  /   \$$ |$$ |$$$$$$$$\\$$$$$$$ |$$ |      \$$$$$$$ |
+\__|       \_______| \_______|       \______/ \__|\__/  \__|      \__/     \__|\__|\________|\_______|\__|       \_______|
+            </pre>
+        </div>
+        <h1>Upload XER File</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".xer">
+            <button type="submit">Upload and Process</button>
+        </form>
+    </div>
+</body>
+</html>

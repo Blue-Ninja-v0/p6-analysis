@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P6 Analysis Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="retro-header">
+            <pre>
+$$$$$$$\                             $$$$$$\  $$\                 $$\      $$\ $$\                                    $$\ 
+$$  __$$\                           $$  __$$\ \__|                $$ | $\  $$ |\__|                                   $$ |
+$$ |  $$ | $$$$$$\   $$$$$$\        $$ /  \__|$$\ $$\   $$\       $$ |$$$\ $$ |$$\ $$$$$$$$\ $$$$$$\   $$$$$$\   $$$$$$$ |
+$$$$$$$  |$$  __$$\ $$  __$$\       \$$$$$$\  $$ |\$$\ $$  |      $$ $$ $$\$$ |$$ |\____$$  |\____$$\ $$  __$$\ $$  __$$ |
+$$  ____/ $$$$$$$$ |$$$$$$$$ |       \____$$\ $$ | \$$$$  /       $$$$  _$$$$ |$$ |  $$$$ _/ $$$$$$$ |$$ |  \__|$$ /  $$ |
+$$ |      $$   ____|$$   ____|      $$\   $$ |$$ | $$  $$<        $$$  / \$$$ |$$ | $$  _/  $$  __$$ |$$ |      $$ |  $$ |
+$$ |      \$$$$$$$\ \$$$$$$$\       \$$$$$$  |$$ |$$  /\$$\       $$  /   \$$ |$$ |$$$$$$$$\\$$$$$$$ |$$ |      \$$$$$$$ |
+\__|       \_______| \_______|       \______/ \__|\__/  \__|      \__/     \__|\__|\________|\_______|\__|       \_______|
+            </pre>
+        </div>
+        <h1>P6 Analysis Configuration</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        
+        <form method="post" action="{{ url_for('configure_analysis', gantt_chart_path=gantt_chart_path) }}">
+            <input type="hidden" name="gantt_chart_path" value="{{ gantt_chart_path }}">
+            
+            <h2>Master Settings</h2>
+            <label for="date_range">Date Range:</label>
+            <select name="date_range" id="date_range">
+                {% for option in ['weekly', 'bi-monthly', 'monthly', '3months', '6months'] %}
+                    <option value="{{ option }}" {% if config['master_settings']['date_range'] == option %}selected{% endif %}>
+                        {{ option }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <h2>Task Type Filters</h2>
+            {% for task_type, settings in config['task_type_filters'].items() %}
+                <div class="task-type">
+                    <input type="checkbox" name="{{ task_type }}" id="{{ task_type }}" {% if settings['include'] %}checked{% endif %}>
+                    <label for="{{ task_type }}">{{ task_type }}</label>
+                    <div class="filter-by">
+                        <label><input type="checkbox" name="filter_by_{{ task_type }}" value="start" {% if 'start' in settings['filter_by'] %}checked{% endif %}> Start</label>
+                        <label><input type="checkbox" name="filter_by_{{ task_type }}" value="end" {% if 'end' in settings['filter_by'] %}checked{% endif %}> End</label>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <h2>Custom Groups</h2>
+            <div id="custom-groups">
+                {% for group_id, group in config['custom_groups'].items() %}
+                    <div class="custom-group">
+                        <input type="text" name="group_name_{{ group_id }}" value="{{ group['name'] }}" placeholder="Group Name">
+                        <input type="text" name="group_task_ids_{{ group_id }}" value="{{ group['task_ids']|join(', ') }}" placeholder="Task IDs (comma-separated)">
+                        <div class="filter-by">
+                            <label><input type="checkbox" name="group_filter_by_{{ group_id }}" value="start" {% if 'start' in group['filter_by'] %}checked{% endif %}> Start</label>
+                            <label><input type="checkbox" name="group_filter_by_{{ group_id }}" value="end" {% if 'end' in group['filter_by'] %}checked{% endif %}> End</label>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button" onclick="addCustomGroup()">Add Custom Group</button>
+
+            <div class="button-container">
+                <a href="{{ url_for('upload_file') }}" class="button button-secondary">Back to Upload</a>
+                <button type="submit" name="action" value="save">Save Configuration</button>
+                <button type="submit" name="action" value="run">Run Analysis</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addCustomGroup() {
+            const container = document.getElementById('custom-groups');
+            const newGroup = document.createElement('div');
+            newGroup.className = 'custom-group';
+            const groupId = Date.now(); // Use timestamp as a unique identifier
+            newGroup.innerHTML = `
+                <input type="text" name="group_name_${groupId}" placeholder="Group Name">
+                <input type="text" name="group_task_ids_${groupId}" placeholder="Task IDs (comma-separated)">
+                <div class="filter-by">
+                    <label><input type="checkbox" name="group_filter_by_${groupId}" value="start"> Start</label>
+                    <label><input type="checkbox" name="group_filter_by_${groupId}" value="end"> End</label>
+                </div>
+            `;
+            container.appendChild(newGroup);
+        }
+    </script>
+</body>
+</html>

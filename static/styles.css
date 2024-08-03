@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    font-family: 'VT323', monospace;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #0c0c0c;
+    color: #33ff33;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #1a1a1a;
+    padding: 30px;
+    border: 1px solid #33ff33;
+    box-shadow: 0 0 10px rgba(51, 255, 51, 0.2);
+    position: relative;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(51, 255, 51, 0.025) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+h1, h2 {
+    color: #33ff33;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+}
+
+select, input[type="text"], input[type="file"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #0c0c0c;
+    border: 1px solid #33ff33;
+    color: #33ff33;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%2333ff33' d='M0 0l4 4 4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.task-type {
+    background-color: #0c0c0c;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #33ff33;
+}
+
+.filter-by {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+button, .button {
+    background-color: #33ff33;
+    color: #0c0c0c;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+}
+
+button:hover, .button:hover {
+    background-color: #0c0c0c;
+    color: #33ff33;
+    box-shadow: 0 0 10px #33ff33;
+}
+
+.button-secondary {
+    background-color: #0c0c0c;
+    color: #33ff33;
+    border: 1px solid #33ff33;
+}
+
+.button-secondary:hover {
+    background-color: #33ff33;
+    color: #0c0c0c;
+}
+
+.custom-group {
+    background-color: #0c0c0c;
+    border: 1px solid #33ff33;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.download-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.download-item {
+    background-color: #0c0c0c;
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #33ff33;
+}
+
+.download-link {
+    color: #33ff33;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.download-link:hover {
+    text-shadow: 0 0 5px #33ff33;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    color: #33ff33;
+    background-color: #0c0c0c;
+    border-color: #33ff33;
+}
+
+.alert-danger {
+    color: #ff3333;
+    background-color: #0c0c0c;
+    border-color: #ff3333;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    font-size: 18px;
+}
+
+input[type="checkbox"]::before {
+    content: '[ ]';
+    color: #33ff33;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '[X]';
+}
+
+.retro-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #33ff33;
+    text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+}
+
+.retro-header pre {
+    font-size: 6px;
+    line-height: 1;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+@media (max-width: 768px) {
+    .retro-header pre {
+        font-size: 4px;
+    }
+}

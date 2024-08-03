@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing XER File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 3px;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+        }
+        .progress-bar-fill {
+            display: block;
+            height: 22px;
+            background-color: #28a745;
+            border-radius: 3px;
+            transition: width 500ms ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="retro-header">
+            <pre>
+$$$$$$$\                             $$$$$$\  $$\                 $$\      $$\ $$\                                    $$\ 
+$$  __$$\                           $$  __$$\ \__|                $$ | $\  $$ |\__|                                   $$ |
+$$ |  $$ | $$$$$$\   $$$$$$\        $$ /  \__|$$\ $$\   $$\       $$ |$$$\ $$ |$$\ $$$$$$$$\ $$$$$$\   $$$$$$\   $$$$$$$ |
+$$$$$$$  |$$  __$$\ $$  __$$\       \$$$$$$\  $$ |\$$\ $$  |      $$ $$ $$\$$ |$$ |\____$$  |\____$$\ $$  __$$\ $$  __$$ |
+$$  ____/ $$$$$$$$ |$$$$$$$$ |       \____$$\ $$ | \$$$$  /       $$$$  _$$$$ |$$ |  $$$$ _/ $$$$$$$ |$$ |  \__|$$ /  $$ |
+$$ |      $$   ____|$$   ____|      $$\   $$ |$$ | $$  $$<        $$$  / \$$$ |$$ | $$  _/  $$  __$$ |$$ |      $$ |  $$ |
+$$ |      \$$$$$$$\ \$$$$$$$\       \$$$$$$  |$$ |$$  /\$$\       $$  /   \$$ |$$ |$$$$$$$$\\$$$$$$$ |$$ |      \$$$$$$$ |
+\__|       \_______| \_______|       \______/ \__|\__/  \__|      \__/     \__|\__|\________|\_______|\__|       \_______|
+            </pre>
+        </div>
+        <h1>Processing XER File</h1>
+        <div id="progress-container">
+            <h3>Overall Progress</h3>
+            <div class="progress-bar">
+                <span class="progress-bar-fill" style="width: 0%;" id="overall-progress"></span>
+            </div>
+            <h3>Current Step: <span id="current-step">Initializing...</span></h3>
+            <div class="progress-bar">
+                <span class="progress-bar-fill" style="width: 0%;" id="step-progress"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateProgress() {
+            $.ajax({
+                url: '/progress',
+                method: 'GET',
+                success: function(data) {
+                    $('#overall-progress').css('width', data.overall_progress + '%');
+                    $('#overall-progress').text(data.overall_progress + '%');
+                    $('#step-progress').css('width', data.step_progress + '%');
+                    $('#step-progress').text(data.step_progress + '%');
+                    $('#current-step').text(data.current_step);
+                    if (data.overall_progress < 100) {
+                        setTimeout(updateProgress, 1000);
+                    } else {
+                        window.location.href = "{{ url_for('process_file', filename=filename) }}";
+                    }
+                },
+                error: function() {
+                    setTimeout(updateProgress, 1000);
+                }
+            });
+        }
+        $(document).ready(function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Download Processed Files</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="retro-header">
+            <pre>
+$$$$$$$\                             $$$$$$\  $$\                 $$\      $$\ $$\                                    $$\ 
+$$  __$$\                           $$  __$$\ \__|                $$ | $\  $$ |\__|                                   $$ |
+$$ |  $$ | $$$$$$\   $$$$$$\        $$ /  \__|$$\ $$\   $$\       $$ |$$$\ $$ |$$\ $$$$$$$$\ $$$$$$\   $$$$$$\   $$$$$$$ |
+$$$$$$$  |$$  __$$\ $$  __$$\       \$$$$$$\  $$ |\$$\ $$  |      $$ $$ $$\$$ |$$ |\____$$  |\____$$\ $$  __$$\ $$  __$$ |
+$$  ____/ $$$$$$$$ |$$$$$$$$ |       \____$$\ $$ | \$$$$  /       $$$$  _$$$$ |$$ |  $$$$ _/ $$$$$$$ |$$ |  \__|$$ /  $$ |
+$$ |      $$   ____|$$   ____|      $$\   $$ |$$ | $$  $$<        $$$  / \$$$ |$$ | $$  _/  $$  __$$ |$$ |      $$ |  $$ |
+$$ |      \$$$$$$$\ \$$$$$$$\       \$$$$$$  |$$ |$$  /\$$\       $$  /   \$$ |$$ |$$$$$$$$\\$$$$$$$ |$$ |      \$$$$$$$ |
+\__|       \_______| \_______|       \______/ \__|\__/  \__|      \__/     \__|\__|\________|\_______|\__|       \_______|
+            </pre>
+        </div>
+        <h1>Download Processed Files</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <ul class="download-list">
+        {% for name, path in output_files %}
+            <li class="download-item">
+                <span>{{ name }}</span>
+                <a href="{{ url_for('download_file', filename=path) }}" class="download-link">Download</a>
+            </li>
+        {% endfor %}
+        </ul>
+        <div class="button-container">
+            <a href="{{ url_for('upload_file') }}" class="button button-secondary">Back to Upload</a>
+            <a href="{{ url_for('configure_analysis', gantt_chart_path=gantt_chart_path) }}" class="button">Proceed to Detailed Analysis</a>
+        </div>
+    </div>
+</body>
+</html>

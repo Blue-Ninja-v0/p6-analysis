@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="retro-header">
+            <pre>
+$$$$$$$\                             $$$$$$\  $$\                 $$\      $$\ $$\                                    $$\ 
+$$  __$$\                           $$  __$$\ \__|                $$ | $\  $$ |\__|                                   $$ |
+$$ |  $$ | $$$$$$\   $$$$$$\        $$ /  \__|$$\ $$\   $$\       $$ |$$$\ $$ |$$\ $$$$$$$$\ $$$$$$\   $$$$$$\   $$$$$$$ |
+$$$$$$$  |$$  __$$\ $$  __$$\       \$$$$$$\  $$ |\$$\ $$  |      $$ $$ $$\$$ |$$ |\____$$  |\____$$\ $$  __$$\ $$  __$$ |
+$$  ____/ $$$$$$$$ |$$$$$$$$ |       \____$$\ $$ | \$$$$  /       $$$$  _$$$$ |$$ |  $$$$ _/ $$$$$$$ |$$ |  \__|$$ /  $$ |
+$$ |      $$   ____|$$   ____|      $$\   $$ |$$ | $$  $$<        $$$  / \$$$ |$$ | $$  _/  $$  __$$ |$$ |      $$ |  $$ |
+$$ |      \$$$$$$$\ \$$$$$$$\       \$$$$$$  |$$ |$$  /\$$\       $$  /   \$$ |$$ |$$$$$$$$\\$$$$$$$ |$$ |      \$$$$$$$ |
+\__|       \_______| \_______|       \______/ \__|\__/  \__|      \__/     \__|\__|\________|\_______|\__|       \_______|
+            </pre>
+        </div>
+        <h1>An Error Occurred</h1>
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+        <div class="button-container">
+            <a href="{{ url_for('upload_file') }}" class="button">Return to Upload Page</a>
+        </div>
+    </div>
+</body>
+</html>
